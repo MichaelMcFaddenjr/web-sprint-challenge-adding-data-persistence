@@ -20,7 +20,7 @@ const getAllTasks = async () => {
   })
 };
 
-const addTasks = async (task) => {
+const addTask = async (task) => {
   const [id] = await db('tasks').insert(task, ['task_id']);
   const newTask = await getById(id);
   console.log(newTask)
@@ -34,4 +34,4 @@ const getById = (task_id) => {
   return db('tasks').where({ task_id }).first();
 };
 
-module.exports = { getAllTasks, addTasks };
+module.exports = { getAllTasks, addTask };
