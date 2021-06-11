@@ -1,5 +1,3 @@
-const { addResource } = require('./model');
-
 const router = require('express').Router();
 const Resource = require('./model')
 
