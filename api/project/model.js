@@ -17,6 +17,8 @@ const getProjects = async () => {
   })
   return projectsUpdate
 }
+//the completion status is stored as an integer, before returning the data to client 
+//it must be switched to a boolean.
 
 const getProjectById = async (project_id) => {
   const project = await db('projects')
@@ -28,6 +30,8 @@ const getProjectById = async (project_id) => {
 
   return project
 }
+//the completion status is stored as an integer, before returning the data to client 
+//it must be switched to a boolean.
 
 const addProject = (project) => {
   return db('projects')
