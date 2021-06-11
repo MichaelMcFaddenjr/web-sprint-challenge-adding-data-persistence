@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Resources = require('./model')
 
+//getting all resources 
 router.get('/', (req, res, next) => {
   Resources.getResources()
     .then(resources => {

@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Projects = require('./model')
-const { checkProjectPayload } = require('./middleware')
+const { checkProjectPayload } = require('./middleware') //used middleware to check post contents
 
+//getting all projects
 router.get('/', (req, res, next) => {
   Projects.getProjects()
     .then(projects => {

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Tasks = require('./model')
 const { checkTaskPayload } = require('./middleware')
 
+//getting all tasks
 router.get('/', async (req, res, next) => {
   try {
     const tasks = await Tasks.getAllTasks()
