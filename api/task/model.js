@@ -26,7 +26,7 @@ const addTask = async (task) => {
   console.log(newTask)
   return {
     ...newTask,
-    task_completed: newTask.task_completed ? true : false
+    task_completed: newTask.task_completed ? true : false //stored an integer 
   }
 };
 

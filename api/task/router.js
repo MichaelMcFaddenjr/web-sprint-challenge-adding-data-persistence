@@ -11,6 +11,14 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// router.post('/', checkTaskPayload, (req, res, next ) => {
+//   const task = req.body
+//   Tasks.addTask(task)
+//     .then(task => {
+//       res.status(201).json(task)
+//     })
+//     .catch(next)
+// })
 router.post('/', checkTaskPayload, async (req, res, next) => {
   try {
     const newTask = await Tasks.addTask(req.body)
@@ -19,6 +27,7 @@ router.post('/', checkTaskPayload, async (req, res, next) => {
     next(err)
   }
 })
+//wanted to practice using try/catch
 
 router.use('/', (req, res) => {
   res.json({ api: 'task router up'})

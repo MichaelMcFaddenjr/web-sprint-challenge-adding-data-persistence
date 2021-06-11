@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const Resource = require('./model')
+const Resources = require('./model')
 
 router.get('/', (req, res, next) => {
-  Resource.getResources()
+  Resources.getResources()
     .then(resources => {
       res.status(200).json(resources)
     })
@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const resource = req.body
-  Resource.addResource(resource)
+  Resources.addResource(resource)
   .then(resource => {
     res.status(201).json(resource)
   })
