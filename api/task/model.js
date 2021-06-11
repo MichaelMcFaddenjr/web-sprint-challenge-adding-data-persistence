@@ -1,7 +1,7 @@
 const db = require('../../data/dbConfig')
 
-const getTasks = async () => {
-  const tasks = await BroadcastChannel('tasks as t')
+const getAllTasks = async () => {
+  const tasks = await db('tasks as t')
     .column(
       't.task_id',
       't.task_description',
@@ -15,28 +15,23 @@ const getTasks = async () => {
   return tasks.map(task => {
     return {
       ...task,
-    task_completed: task.task_completed ? true : false
+      task_completed: task.task_completed ? true : false
     }
   })
-}
+};
 
-const getTaskById = async (task_id) => {
-  const task = await db('tasks')
-    .where('task_id', task_id)
-    .first()
-  task.task_completed === 0 ?
-  task.task_completed = false :
-  task.task_completed = true
+const addTasks = async (task) => {
+  const [id] = await db('tasks').insert(task, ['task_id']);
+  const newTask = await getById(id);
+  console.log(newTask)
+  return {
+    ...newTask,
+    task_completed: newTask.task_completed ? true : false
+  }
+};
 
-  return task
-}
+const getById = (task_id) => {
+  return db('tasks').where({ task_id }).first();
+};
 
-const addTask = (task) => {
-  return db('tasks')
-    .insert(task)
-    .then(tasks_id => {
-      return getTaskById(tasks_id[0])
-    })
-}
-
-module.exports = { getTasks, getTaskById, addTask }
+module.exports = { getAllTasks, addTasks };
