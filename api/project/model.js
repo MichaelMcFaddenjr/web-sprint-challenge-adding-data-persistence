@@ -18,12 +18,23 @@ const getProjects = async () => {
   return projectsUpdate
 }
 
+const getProjectById = async (project_id) => {
+  const project = await db('projects')
+    .where('project_id', project_id)
+    .first()
+  project.project_completed === 0 ?
+  project.project_completed = false :
+  project.project_completed = true;
+
+  return project
+}
+
 const addProject = (project) => {
   return db('projects')
     .insert(project)
-    .then(([project_id]) => {
-      return db('projects').where('project_id', project_id).first()
+    .then(project_id => {
+      return getProjectById(project_id[0])
     })
 }
 
-module.exports = { getProjects, addProject }
+module.exports = { getProjects, getProjectById, addProject }
